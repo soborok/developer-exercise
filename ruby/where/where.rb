@@ -3,10 +3,14 @@ class Array
     matching_key = args.keys.first
     matching_value = args.values.first
 
-    if matching_value.class == Regexp
-      self.map { |element| element if element[matching_key].match matching_value }.compact
-    else
-      self.map { |element| element if element[matching_key] == matching_value }.compact
+    all_elements = self.dup
+
+    all_elements.delete_if do |element| 
+     if matching_value.class == Regexp
+        !element[matching_key].match args[matching_key] 
+      else
+        element[matching_key] != args[matching_key] 
+      end
     end
- end
+  end
 end
