@@ -46,46 +46,36 @@ end
 class Hand
   attr_accessor :cards
 
-  def initialize
+  def initialize()
     @cards = []
   end
+
+  def show_play_hand
+    cards.map { |card| "#{card.suite} #{card.name}" }.join(', ')
+  end
+
+  def show_dealer_hand_at_dealing
+    "##### ###, #{cards[1].suite} #{cards[1].name}"
+  end
+
+  def sum
+    sum = cards.map do |card| 
+      card.name == :ace ? card.value[0] : card.value 
+    end.inject(:+)
+    
+    if sum > 21 && cards.map { |card| card.name }.include?(:ace)
+      sum -= 10
+    end
+    
+    sum
+  end
+
+  def blackjack?
+    sum == 21 ? true : false
+  end
+
+  def bust?
+    sum > 21 ? true : false
+  end
 end
 
-require 'test/unit'
-
-class CardTest < Test::Unit::TestCase
-  def setup
-    @card = Card.new(:hearts, :ten, 10)
-  end
-  
-  def test_card_suite_is_correct
-    assert_equal @card.suite, :hearts
-  end
-
-  def test_card_name_is_correct
-    assert_equal @card.name, :ten
-  end
-  def test_card_value_is_correct
-    assert_equal @card.value, 10
-  end
-end
-
-class DeckTest < Test::Unit::TestCase
-  def setup
-    @deck = Deck.new
-  end
-  
-  def test_new_deck_has_52_playable_cards
-    assert_equal @deck.playable_cards.size, 52
-  end
-  
-  def test_dealt_card_should_not_be_included_in_playable_cards
-    card = @deck.deal_card
-    assert(!@deck.playable_cards.include?(card))
-  end
-
-  def test_shuffled_deck_has_52_playable_cards
-    @deck.shuffle
-    assert_equal @deck.playable_cards.size, 52
-  end
-end
