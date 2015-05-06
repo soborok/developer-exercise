@@ -42,6 +42,12 @@ class HandTest < Test::Unit::TestCase
   def setup
     @hand = Hand.new
     @hand.cards = [Card.new(:spades, :eight, 8), Card.new(:hearts, :ace, [11, 1])]
+
+    @blackjack = Hand.new
+    @blackjack.cards = [Card.new(:clubs, :eight, 10), Card.new(:diamonds, :ace, [11, 1])]
+
+    @hand_with_ace = Hand.new
+    @hand_with_ace.cards = [Card.new(:clubs, :eight, 10), Card.new(:diamonds, :ace, [11, 1]), Card.new(:spades, :five, 5)]
   end
 
   def test_show_play_hand
@@ -56,11 +62,15 @@ class HandTest < Test::Unit::TestCase
     assert_equal @hand.sum, 19
   end
 
-  def test_hand_should_not_be_blackjack
-    assert !@hand.blackjack?
+  def test_sum_of_hand_with_ace_should_be_16
+    assert_equal @hand_with_ace.sum, 16
+  end
+
+  def test_hand_should_be_blackjack
+    assert @blackjack.blackjack?
   end
 
   def test_hand_should_not_bust
-    assert !@hand.bust?
+    assert(!@hand_with_ace.bust?)
   end
 end

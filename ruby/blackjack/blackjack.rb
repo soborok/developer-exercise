@@ -78,4 +78,3 @@ class Hand
     sum > 21 ? true : false
   end
 end
-
