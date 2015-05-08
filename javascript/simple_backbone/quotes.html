@@ -5,8 +5,44 @@
   <script src="http://code.jquery.com/jquery-latest.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
+  <script src="./backbone.paginator.js"></script>
+  <script src="./quotes.js"></script>
+  <link rel="stylesheet" type="text/css" href="quote.css">
 </head>
-<body>
 
+<body>
+  <header id="list-title">
+    <h2>Quote List</h2>
+    <span class="quote filter movies">
+      <a href="#" id="movies">movies</a>
+    </span>
+    <span class="quote filter games">
+      <a href="#" id="games">games</a>
+    </span>
+  </header>
+  <div id="quote-list">
+  </div>
 </body>
+
+<script>
+  var quotes = new QuoteCollection();
+  var quoteListView = new QuoteListView({ collection: quotes });
+  quotes.fetch({ reset: true });
+  
+  $("#list-title span a").on('click', function() {
+    var theme = $(this).attr('id');
+
+    var quotesOfTheme = new Backbone.Collection(quotes.filter(function(quote) {
+      return quote.get("theme") == theme;
+    }));
+
+    quoteListView = new QuoteListView({ collection: quotesOfTheme });
+    quoteListView.addAll();
+
+    $("#quote-list ul").replaceWith(quoteListView.el);
+  });
+
+  quoteListView.listenTo(quotes, 'reset', quoteListView.addAll);  
+  $("#quote-list").append(quoteListView.el);
+  </script>
 </html>

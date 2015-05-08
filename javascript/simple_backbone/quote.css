@@ -1,0 +1,53 @@
+body {
+  font-family: Lucida Grande;
+}
+
+#list-title {
+  text-align: center;
+}
+
+span.quote {
+  margin: auto 10px;
+}
+
+.filter a {
+  text-decoration: none;
+}
+
+.movies {
+  background-color: pink;
+}
+
+.games {
+  background-color: powderblue;
+}
+
+#quote-list {
+  margin-top: 20px;
+}
+
+.quote-list-ul li {
+  border-radius: 5px;
+  list-style-type: none;
+  background-color: aliceblue;
+  padding: 15px;
+  margin: 2px;
+} 
+
+.quote-list-ul li h3 {
+  margin: 5px;
+}
+
+#quote-details {
+  display: block;
+  margin-top: 15px;
+  margin-left: 50px;
+}
+
+.quote .context {
+  font-style: italic;
+}
+
+.quote .source {
+  font-weight: bold;
+}
