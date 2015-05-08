@@ -42,6 +42,12 @@
     $("#quote-list ul").replaceWith(quoteListView.el);
   });
 
+  $("#list-title h2").on('click', function() {
+    quoteListView = new QuoteListView({ collection: quotes });
+    quoteListView.addAll();
+    $("#quote-list ul").replaceWith(quoteListView.el);
+  });
+
   quoteListView.listenTo(quotes, 'reset', quoteListView.addAll);  
   $("#quote-list").append(quoteListView.el);
   </script>
