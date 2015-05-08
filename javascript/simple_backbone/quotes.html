@@ -13,11 +13,9 @@
 <body>
   <header id="list-title">
     <h2>Quote List</h2>
-    <span class="quote filter movies">
-      <a href="#" id="movies">movies</a>
+    <span class="quote filter movies" id="movies">movies
     </span>
-    <span class="quote filter games">
-      <a href="#" id="games">games</a>
+    <span class="quote filter games" id="games">games
     </span>
   </header>
   <div id="quote-list">
@@ -29,7 +27,7 @@
   var quoteListView = new QuoteListView({ collection: quotes });
   quotes.fetch({ reset: true });
   
-  $("#list-title span a").on('click', function() {
+  $("#list-title span").on('click', function() {
     var theme = $(this).attr('id');
 
     var quotesOfTheme = new Backbone.Collection(quotes.filter(function(quote) {
