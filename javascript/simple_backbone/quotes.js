@@ -18,6 +18,10 @@ var QuoteListView = Backbone.View.extend({
 
   className: "quote-list-ul",
 
+  initialize: function() {
+    this.listenTo(this.collection, 'reset', this.addAll);
+  },
+
   addOne: function(quote) {
     var quoteView = new QuoteView({ model: quote});
     quoteView.render();
