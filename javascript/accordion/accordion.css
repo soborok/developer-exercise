@@ -1,0 +1,14 @@
+.accordion-header {
+  background: linear-gradient(lightgrey, gainsboro);
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 2px;
+}
+
+.accordion-header div {
+  display: none;
+}
+
+.active div {
+  display: block;
+}
